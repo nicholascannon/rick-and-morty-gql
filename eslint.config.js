@@ -6,6 +6,7 @@ import tseslint from 'typescript-eslint';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import unusedImports from 'eslint-plugin-unused-imports';
 import importPlugin from 'eslint-plugin-import';
+import react from 'eslint-plugin-react';
 
 export default tseslint.config(
     { ignores: ['dist'] },
@@ -14,27 +15,36 @@ export default tseslint.config(
             js.configs.recommended,
             importPlugin.flatConfigs.recommended,
             importPlugin.flatConfigs.typescript,
-            ...tseslint.configs.recommended,
+            ...tseslint.configs.recommendedTypeChecked,
+            ...tseslint.configs.stylisticTypeChecked,
         ],
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
             globals: globals.browser,
+            parserOptions: {
+                project: ['./tsconfig.node.json', './tsconfig.app.json'],
+                tsconfigRootDir: import.meta.dirname,
+            },
         },
         plugins: {
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,
             'unused-imports': unusedImports,
+            react,
         },
         settings: {
-            // Allow imports from public directory
+            react: { version: 'detect' },
             'import/resolver': {
+                typescript: {},
                 alias: {
                     map: [['', './public']],
                 },
             },
         },
         rules: {
+            ...react.configs.recommended.rules,
+            ...react.configs['jsx-runtime'].rules,
             ...reactHooks.configs.recommended.rules,
             'react-refresh/only-export-components': [
                 'warn',
