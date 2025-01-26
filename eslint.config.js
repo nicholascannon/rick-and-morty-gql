@@ -94,6 +94,13 @@ export default tseslint.config(
         },
     },
     {
+        // shadui/cn components
+        files: ['src/components/ui/**/*.{ts,tsx}'],
+        rules: {
+            'react-refresh/only-export-components': 'off',
+        },
+    },
+    {
         // Config files
         files: ['*.js', 'vite.config.ts'],
         rules: {
