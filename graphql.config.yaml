@@ -1,0 +1,10 @@
+schema: 'https://rickandmortyapi.com/graphql'
+documents:
+    - 'src/**/*.gql'
+
+extensions:
+    codegen:
+        ignoreNoDocuments: true
+        generates:
+            src/__generated__/:
+                preset: 'client'
