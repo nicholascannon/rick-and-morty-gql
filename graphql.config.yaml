@@ -8,3 +8,7 @@ extensions:
         generates:
             src/__generated__/:
                 preset: 'client'
+            src/__generated__/types.ts:
+                plugins:
+                    - 'typescript'
+                    - 'typescript-operations'

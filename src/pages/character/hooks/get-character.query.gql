@@ -1,0 +1,6 @@
+query GetCharacter($id: ID!) {
+    character(id: $id) {
+        name
+        image
+    }
+}
