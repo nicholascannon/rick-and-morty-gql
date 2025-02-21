@@ -9,7 +9,7 @@ import importPlugin from 'eslint-plugin-import';
 import react from 'eslint-plugin-react';
 
 export default tseslint.config(
-    { ignores: ['dist'] },
+    { ignores: ['dist', 'src/__generated__/*'] },
     {
         extends: [
             js.configs.recommended,
