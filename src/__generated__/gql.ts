@@ -14,10 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    image\n  }\n}": typeof types.GetCharacterDocument,
+    "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}": typeof types.GetCharacterDocument,
 };
 const documents: Documents = {
-    "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    image\n  }\n}": types.GetCharacterDocument,
+    "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}": types.GetCharacterDocument,
 };
 
 /**
@@ -37,7 +37,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    image\n  }\n}"): (typeof documents)["query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    image\n  }\n}"];
+export function graphql(source: "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}"): (typeof documents)["query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

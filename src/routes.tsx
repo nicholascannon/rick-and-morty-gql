@@ -1,6 +1,6 @@
 import { Route, Routes as Switch } from 'react-router';
 
-import { RootLayout } from '@/components/ui/root-layout';
+import { RootLayout } from '@/components/root-layout';
 import { CharacterDetailsPage } from '@/pages/character';
 import { TablePage } from '@/pages/table';
 
