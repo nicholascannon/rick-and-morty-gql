@@ -4,7 +4,7 @@ import { MenuBar } from './menu-bar';
 
 export function RootLayout() {
     return (
-        <main className="min-h-screen container mx-auto px-12 mb-16">
+        <main className="min-h-screen container mx-auto lg:px-32 px-10 mb-16">
             <MenuBar />
             <Outlet />
         </main>
