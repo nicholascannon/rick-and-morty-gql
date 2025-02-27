@@ -15,9 +15,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}": typeof types.GetCharacterDocument,
+    "query GetCharacters($page: Int!) {\n  characters(page: $page) {\n    info {\n      count\n      pages\n      next\n      prev\n    }\n    results {\n      ...TableCharacter\n    }\n  }\n}\n\nfragment TableCharacter on Character {\n  id\n  name\n  image\n}": typeof types.GetCharactersDocument,
 };
 const documents: Documents = {
     "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}": types.GetCharacterDocument,
+    "query GetCharacters($page: Int!) {\n  characters(page: $page) {\n    info {\n      count\n      pages\n      next\n      prev\n    }\n    results {\n      ...TableCharacter\n    }\n  }\n}\n\nfragment TableCharacter on Character {\n  id\n  name\n  image\n}": types.GetCharactersDocument,
 };
 
 /**
@@ -38,6 +40,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}"): (typeof documents)["query GetCharacter($id: ID!) {\n  character(id: $id) {\n    name\n    gender\n    image\n    species\n    status\n    origin {\n      name\n    }\n    lastLocation: location {\n      name\n    }\n    episode {\n      id\n      name\n      air_date\n      episode\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetCharacters($page: Int!) {\n  characters(page: $page) {\n    info {\n      count\n      pages\n      next\n      prev\n    }\n    results {\n      ...TableCharacter\n    }\n  }\n}\n\nfragment TableCharacter on Character {\n  id\n  name\n  image\n}"): (typeof documents)["query GetCharacters($page: Int!) {\n  characters(page: $page) {\n    info {\n      count\n      pages\n      next\n      prev\n    }\n    results {\n      ...TableCharacter\n    }\n  }\n}\n\nfragment TableCharacter on Character {\n  id\n  name\n  image\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

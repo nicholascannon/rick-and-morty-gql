@@ -1,0 +1,19 @@
+query GetCharacters($page: Int!) {
+    characters(page: $page) {
+        info {
+            count
+            pages
+            next
+            prev
+        }
+        results {
+            ...TableCharacter
+        }
+    }
+}
+
+fragment TableCharacter on Character {
+    id
+    name
+    image
+}
