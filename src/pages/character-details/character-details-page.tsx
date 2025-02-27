@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 
-import { CharacterNotFound } from './character-not-found';
-import { EpisodeTable } from './episode-table';
+import { CharacterNotFound } from './components/character-not-found';
+import { EpisodeTable } from './components/episode-table';
 import { useGetCharacter } from './hooks/use-get-character';
 
 import { Skeleton } from '@/components/ui/skeleton';
