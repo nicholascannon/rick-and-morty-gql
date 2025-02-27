@@ -1,16 +1,10 @@
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 
+import { CharacterNotFound } from './character-not-found';
+import { EpisodeTable } from './episode-table';
 import { useGetCharacter } from './hooks/use-get-character';
 
 import { Skeleton } from '@/components/ui/skeleton';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
 
 export function CharacterDetailsPage() {
     const { id } = useParams<{ id: string }>();
@@ -18,27 +12,7 @@ export function CharacterDetailsPage() {
     const { loading, data } = useGetCharacter(id);
     const character = data?.character;
 
-    if (!loading && !character) {
-        return (
-            <section className="flex flex-col gap-4 justify-center items-center">
-                <img
-                    className="w-[200px] h-[200px] rounded-full"
-                    src="/headshot.jpg"
-                    alt="Unknown character avatar"
-                />
-                <div className="text-center">
-                    <h1 className="text-3xl ">Oops! Who is that?</h1>
-                    <p className="text-gray-500">
-                        Sorry that character doesn&apos;t exist.{' '}
-                        <Link className="underline" to="/">
-                            Go back
-                        </Link>
-                        .
-                    </p>
-                </div>
-            </section>
-        );
-    }
+    if (!loading && !character) return <CharacterNotFound />;
 
     return (
         <div className="flex flex-col gap-10">
@@ -86,40 +60,8 @@ export function CharacterDetailsPage() {
             </section>
 
             <section>
-                <h2 className="text-2xl ">Episodes</h2>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Episode</TableHead>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Aired</TableHead>
-                        </TableRow>
-                    </TableHeader>
-
-                    <TableBody>
-                        {character
-                            ? character?.episode.map((episode) => (
-                                  <TableRow key={episode?.id}>
-                                      <TableCell>{episode?.episode}</TableCell>
-                                      <TableCell>{episode?.name}</TableCell>
-                                      <TableCell>{episode?.air_date}</TableCell>
-                                  </TableRow>
-                              ))
-                            : new Array(5).fill(null).map((_, index) => (
-                                  <TableRow key={index}>
-                                      <TableCell>
-                                          <Skeleton className="h-[20px] w-[50px]" />
-                                      </TableCell>
-                                      <TableCell>
-                                          <Skeleton className="h-[20px] w-[150px]" />
-                                      </TableCell>
-                                      <TableCell>
-                                          <Skeleton className="h-[20px] w-[100px]" />
-                                      </TableCell>
-                                  </TableRow>
-                              ))}
-                    </TableBody>
-                </Table>
+                <h2 className="text-2xl ">Appears in</h2>
+                <EpisodeTable character={character} />
             </section>
         </div>
     );
