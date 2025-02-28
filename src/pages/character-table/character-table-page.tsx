@@ -46,7 +46,7 @@ export function CharacterTablePage() {
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return (
-        <section>
+        <section className="flex flex-col gap-4">
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -83,8 +83,9 @@ export function CharacterTablePage() {
                           ))
                         : new Array(10).fill(null).map((_, index) => (
                               <TableRow key={index}>
-                                  <TableCell>
-                                      <Skeleton className="h-[20px] w-[150px]" />
+                                  <TableCell className="flex flex-row items-center">
+                                      <Skeleton className="h-[40px] w-[40px] rounded-full" />
+                                      <Skeleton className="h-[20px] w-[150px] ml-4" />
                                   </TableCell>
                               </TableRow>
                           ))}
