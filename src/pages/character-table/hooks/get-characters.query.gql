@@ -1,15 +1,19 @@
 query GetCharacters($page: Int!) {
     characters(page: $page) {
         info {
-            count
-            pages
-            next
-            prev
+            ...PaginationInfo
         }
         results {
             ...TableCharacter
         }
     }
+}
+
+fragment PaginationInfo on Info {
+    count
+    pages
+    next
+    prev
 }
 
 fragment TableCharacter on Character {
