@@ -52,18 +52,31 @@ export function TablePagination({ pagination }: Props) {
                     />
                 </PaginationItem>
 
-                {/* TODO: add page numbers */}
-                {/* <PaginationItem>
-                            <PaginationLink>1</PaginationLink>
-                        </PaginationItem>
+                {/* TODO: finish page buttons */}
+                {/* {new Array(3).fill(null).map((_, index) => (
+                    <PaginationItem key={index}>
+                        <PaginationLink
+                            isActive={page === index + 1}
+                            to={getPageLink(index + 1)}
+                        >
+                            {index + 1}
+                        </PaginationLink>
+                    </PaginationItem>
+                ))}
 
-                        <PaginationItem>
-                            <PaginationLink isActive>2</PaginationLink>
-                        </PaginationItem>
-
+                {totalPages && page < totalPages - 2 && (
+                    <>
                         <PaginationItem>
                             <PaginationEllipsis />
-                        </PaginationItem> */}
+                        </PaginationItem>
+
+                        <PaginationItem>
+                            <PaginationLink to={getPageLink(totalPages)}>
+                                {totalPages}
+                            </PaginationLink>
+                        </PaginationItem>
+                    </>
+                )} */}
 
                 <PaginationItem>
                     <PaginationNext

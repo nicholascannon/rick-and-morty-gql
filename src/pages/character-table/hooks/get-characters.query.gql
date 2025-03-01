@@ -11,7 +11,7 @@ query GetCharacters($page: Int!) {
 
 fragment PaginationInfo on Info {
     count
-    pages
+    totalPages: pages
     next
     prev
 }
