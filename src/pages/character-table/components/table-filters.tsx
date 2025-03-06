@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
 import { X } from 'lucide-react';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { FilterCharacter } from '@/__generated__/types';
 import { Input } from '@/components/ui/input';
@@ -42,30 +42,51 @@ export function TableFilters(props: Props) {
                 placeholder="Search characters"
             />
 
-            <div className="flex gap-2">
-                <Select
-                    value={localFilterState.status ?? ''}
-                    onValueChange={(value) => onFilterChange('status', value)}
-                >
-                    <SelectTrigger className="md:w-[180px]">
-                        <SelectValue placeholder="Status" />
-                    </SelectTrigger>
-
-                    <SelectContent>
+            <DropDownSelect
+                placeholder="Status"
+                value={localFilterState.status ?? ''}
+                options={
+                    <>
                         <SelectItem value="Alive">Alive</SelectItem>
                         <SelectItem value="Dead">Dead</SelectItem>
                         <SelectItem value="Unknown">Unknown</SelectItem>
-                    </SelectContent>
-                </Select>
-                {localFilterState.status && (
-                    <button
-                        className="text-muted-foreground"
-                        onClick={() => onFilterChange('status', undefined)}
-                    >
-                        <X className="h-4 w-4" />
-                    </button>
-                )}
-            </div>
+                    </>
+                }
+                onValueChange={(value) => onFilterChange('status', value)}
+                onReset={() => onFilterChange('status', undefined)}
+            />
         </section>
+    );
+}
+
+function DropDownSelect({
+    value,
+    options,
+    placeholder,
+    onValueChange,
+    onReset,
+}: {
+    value: string | undefined;
+    options: ReactNode;
+    placeholder?: ReactNode;
+    onValueChange?: (value: string) => void;
+    onReset?: () => void;
+}) {
+    return (
+        <div className="flex gap-2">
+            <Select value={value} onValueChange={onValueChange}>
+                <SelectTrigger className="md:w-[180px]">
+                    <SelectValue placeholder={placeholder} />
+                </SelectTrigger>
+
+                <SelectContent>{options}</SelectContent>
+            </Select>
+
+            {value && (
+                <button className="text-muted-foreground" onClick={onReset}>
+                    <X className="h-4 w-4" />
+                </button>
+            )}
+        </div>
     );
 }
