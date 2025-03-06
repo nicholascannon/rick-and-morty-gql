@@ -44,7 +44,7 @@ export function TableFilters(props: Props) {
 
             <div className="flex gap-2">
                 <Select
-                    value={localFilterState.status ?? undefined}
+                    value={localFilterState.status ?? ''}
                     onValueChange={(value) => onFilterChange('status', value)}
                 >
                     <SelectTrigger className="md:w-[180px]">
