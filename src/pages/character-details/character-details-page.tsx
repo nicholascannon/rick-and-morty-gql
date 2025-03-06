@@ -34,14 +34,16 @@ export function CharacterDetailsPage() {
                 <div>
                     {character ? (
                         <>
-                            <h1 className="text-3xl">{character.name}</h1>
-                            <p className="text-gray-500 text-xl">
+                            <h1 className="text-3xl font-semibold">
+                                {character.name}
+                            </h1>
+                            <p className="text-muted-foreground font-medium text-xl">
                                 {character?.species} &middot;{' '}
                                 {character?.gender}
                             </p>
 
-                            <p className="text-sm text-gray-500 mt-2">{`Origin: ${character?.origin?.name ?? 'unknown'}`}</p>
-                            <p className="text-sm text-gray-500">{`Last seen: ${character?.lastLocation?.name ?? 'unknown'}`}</p>
+                            <p className="text-sm text-muted-foreground mt-2">{`Origin: ${character?.origin?.name ?? 'unknown'}`}</p>
+                            <p className="text-sm text-muted-foreground">{`Last seen: ${character?.lastLocation?.name ?? 'unknown'}`}</p>
                         </>
                     ) : (
                         <>
