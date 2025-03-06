@@ -50,6 +50,22 @@ export function TableFilters(props: Props) {
                 onValueChange={(value) => onFilterChange('status', value)}
                 onReset={() => onFilterChange('status', undefined)}
             />
+
+            <DropDownSelect
+                placeholder="Gender"
+                value={localFilterState.gender ?? ''}
+                triggerClassName="md:w-[180px]"
+                options={
+                    <>
+                        <SelectItem value="Male">Male</SelectItem>
+                        <SelectItem value="Female">Female</SelectItem>
+                        <SelectItem value="Genderless">Genderless</SelectItem>
+                        <SelectItem value="Unknown">Unknown</SelectItem>
+                    </>
+                }
+                onValueChange={(value) => onFilterChange('gender', value)}
+                onReset={() => onFilterChange('gender', undefined)}
+            />
         </section>
     );
 }

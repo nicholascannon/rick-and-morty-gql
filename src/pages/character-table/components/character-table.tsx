@@ -24,6 +24,9 @@ export function CharacterTable({ characters }: Props) {
             <TableHeader>
                 <TableRow>
                     <TableHead>Name</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Species</TableHead>
+                    <TableHead>Gender</TableHead>
                 </TableRow>
             </TableHeader>
 
@@ -48,6 +51,12 @@ export function CharacterTable({ characters }: Props) {
                                       {character.name ?? 'Unknown character'}
                                   </Link>
                               </TableCell>
+
+                              <TableCell>{character.status}</TableCell>
+
+                              <TableCell>{character.species}</TableCell>
+
+                              <TableCell>{character.gender}</TableCell>
                           </TableRow>
                       ))
                     : new Array(5).fill(null).map((_, index) => (

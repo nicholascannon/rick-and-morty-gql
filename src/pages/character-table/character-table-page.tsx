@@ -1,36 +1,31 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router';
 
 import { CharacterTable } from './components/character-table';
 import { TableFilters } from './components/table-filters';
 import { TablePagination } from './components/table-pagination';
 import { useGetCharacters } from './hooks/use-get-characters';
+import { useSyncFilterParams } from './hooks/use-sync-filter-params';
 
 import { FilterCharacter } from '@/__generated__/types';
 
 export function CharacterTablePage() {
-    const navigate = useNavigate();
-
     const [searchParams] = useSearchParams();
+
     const page = Number(searchParams.get('page') ?? 1);
     const name = searchParams.get('name');
     const status = searchParams.get('status');
+    const gender = searchParams.get('gender');
 
     const [filterState, setFilterState] = useState<FilterCharacter>({
         name,
         status,
+        gender,
     });
 
     const { data, error } = useGetCharacters(page, filterState);
 
-    useEffect(() => {
-        const updatedParams = new URLSearchParams();
-        updatedParams.set('page', String(page));
-        if (filterState.name) updatedParams.set('name', filterState.name);
-        if (filterState.status) updatedParams.set('status', filterState.status);
-
-        void navigate(`?${updatedParams.toString()}`, { replace: true });
-    }, [filterState, navigate, page]);
+    useSyncFilterParams(filterState, page);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

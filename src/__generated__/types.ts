@@ -213,8 +213,8 @@ export type GetCharactersQueryVariables = Exact<{
 }>;
 
 
-export type GetCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', info?: { __typename?: 'Info', count?: number | null, next?: number | null, prev?: number | null, totalPages?: number | null } | null, results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null } | null> | null } | null };
+export type GetCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', info?: { __typename?: 'Info', count?: number | null, next?: number | null, prev?: number | null, totalPages?: number | null } | null, results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null, status?: string | null, species?: string | null, gender?: string | null } | null> | null } | null };
 
 export type PaginationInfoFragment = { __typename?: 'Info', count?: number | null, next?: number | null, prev?: number | null, totalPages?: number | null };
 
-export type TableCharacterFragment = { __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null };
+export type TableCharacterFragment = { __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null, status?: string | null, species?: string | null, gender?: string | null };
