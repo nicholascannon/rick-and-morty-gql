@@ -14,8 +14,12 @@ export function CharacterTablePage() {
     const [searchParams] = useSearchParams();
     const page = Number(searchParams.get('page') ?? 1);
     const name = searchParams.get('name');
+    const status = searchParams.get('status');
 
-    const [filterState, setFilterState] = useState<FilterCharacter>({ name });
+    const [filterState, setFilterState] = useState<FilterCharacter>({
+        name,
+        status,
+    });
 
     const { data, error } = useGetCharacters(page, filterState);
 
@@ -23,6 +27,7 @@ export function CharacterTablePage() {
         const updatedParams = new URLSearchParams();
         updatedParams.set('page', String(page));
         if (filterState.name) updatedParams.set('name', filterState.name);
+        if (filterState.status) updatedParams.set('status', filterState.status);
 
         void navigate(`?${updatedParams.toString()}`, { replace: true });
     }, [filterState, navigate, page]);
