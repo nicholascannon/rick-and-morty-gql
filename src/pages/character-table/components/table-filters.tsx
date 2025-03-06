@@ -1,16 +1,10 @@
 import debounce from 'lodash.debounce';
-import { X } from 'lucide-react';
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 
 import { FilterCharacter } from '@/__generated__/types';
+import { DropDownSelect } from '@/components/drop-down-select';
 import { Input } from '@/components/ui/input';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
+import { SelectItem } from '@/components/ui/select';
 
 interface Props {
     filterState: FilterCharacter;
@@ -45,6 +39,7 @@ export function TableFilters(props: Props) {
             <DropDownSelect
                 placeholder="Status"
                 value={localFilterState.status ?? ''}
+                triggerClassName="md:w-[180px]"
                 options={
                     <>
                         <SelectItem value="Alive">Alive</SelectItem>
@@ -56,37 +51,5 @@ export function TableFilters(props: Props) {
                 onReset={() => onFilterChange('status', undefined)}
             />
         </section>
-    );
-}
-
-function DropDownSelect({
-    value,
-    options,
-    placeholder,
-    onValueChange,
-    onReset,
-}: {
-    value: string | undefined;
-    options: ReactNode;
-    placeholder?: ReactNode;
-    onValueChange?: (value: string) => void;
-    onReset?: () => void;
-}) {
-    return (
-        <div className="flex gap-2">
-            <Select value={value} onValueChange={onValueChange}>
-                <SelectTrigger className="md:w-[180px]">
-                    <SelectValue placeholder={placeholder} />
-                </SelectTrigger>
-
-                <SelectContent>{options}</SelectContent>
-            </Select>
-
-            {value && (
-                <button className="text-muted-foreground" onClick={onReset}>
-                    <X className="h-4 w-4" />
-                </button>
-            )}
-        </div>
     );
 }
