@@ -209,6 +209,7 @@ export type GetCharacterQuery = { __typename?: 'Query', character?: { __typename
 
 export type GetCharactersQueryVariables = Exact<{
   page: Scalars['Int']['input'];
+  filter?: InputMaybe<FilterCharacter>;
 }>;
 
 
