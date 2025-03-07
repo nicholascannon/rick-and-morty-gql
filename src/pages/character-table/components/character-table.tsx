@@ -2,7 +2,12 @@ import { Link } from 'react-router';
 
 import { isCharacter } from '../utils/is-character';
 
-import { TableCharacterFragment } from '@/__generated__/types';
+import { NoResults } from './no-results';
+
+import {
+    PaginationInfoFragment,
+    TableCharacterFragment,
+} from '@/__generated__/types';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -16,58 +21,73 @@ import {
 
 interface Props {
     characters: (TableCharacterFragment | null)[] | undefined | null;
+    pagination: PaginationInfoFragment | null | undefined;
 }
 
-export function CharacterTable({ characters }: Props) {
+export function CharacterTable({ characters, pagination }: Props) {
     return (
-        <Table>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Species</TableHead>
-                    <TableHead>Gender</TableHead>
-                </TableRow>
-            </TableHeader>
+        <>
+            {pagination?.count && characters?.length && (
+                <p className="text-sm text-muted-foreground">
+                    Showing {characters?.length} of {pagination.count}
+                </p>
+            )}
 
-            <TableBody>
-                {characters
-                    ? characters.filter(isCharacter).map((character) => (
-                          <TableRow key={character.id}>
-                              <TableCell className="flex flex-row items-center">
-                                  <Avatar>
-                                      <AvatarImage
-                                          src={
-                                              character.image ?? '/headshot.jpg'
-                                          }
-                                          alt={character.name ?? 'Character'}
-                                      />
-                                  </Avatar>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Species</TableHead>
+                        <TableHead>Gender</TableHead>
+                    </TableRow>
+                </TableHeader>
 
-                                  <Link
-                                      to={`/character/${character.id}`}
-                                      className="ml-4"
-                                  >
-                                      {character.name ?? 'Unknown character'}
-                                  </Link>
-                              </TableCell>
+                <TableBody>
+                    {characters
+                        ? characters.filter(isCharacter).map((character) => (
+                              <TableRow key={character.id}>
+                                  <TableCell className="flex flex-row items-center">
+                                      <Avatar>
+                                          <AvatarImage
+                                              src={
+                                                  character.image ??
+                                                  '/headshot.jpg'
+                                              }
+                                              alt={
+                                                  character.name ?? 'Character'
+                                              }
+                                          />
+                                      </Avatar>
 
-                              <TableCell>{character.status}</TableCell>
+                                      <Link
+                                          to={`/character/${character.id}`}
+                                          className="ml-4"
+                                      >
+                                          {character.name ??
+                                              'Unknown character'}
+                                      </Link>
+                                  </TableCell>
 
-                              <TableCell>{character.species}</TableCell>
+                                  <TableCell>{character.status}</TableCell>
 
-                              <TableCell>{character.gender}</TableCell>
-                          </TableRow>
-                      ))
-                    : new Array(5).fill(null).map((_, index) => (
-                          <TableRow key={index}>
-                              <TableCell className="flex flex-row items-center">
-                                  <Skeleton className="h-[40px] w-[40px] rounded-full" />
-                                  <Skeleton className="h-[20px] w-[150px] ml-4" />
-                              </TableCell>
-                          </TableRow>
-                      ))}
-            </TableBody>
-        </Table>
+                                  <TableCell>{character.species}</TableCell>
+
+                                  <TableCell>{character.gender}</TableCell>
+                              </TableRow>
+                          ))
+                        : new Array(5).fill(null).map((_, index) => (
+                              <TableRow key={index}>
+                                  <TableCell className="flex flex-row items-center">
+                                      <Skeleton className="h-[40px] w-[40px] rounded-full" />
+                                      <Skeleton className="h-[20px] w-[150px] ml-4" />
+                                  </TableCell>
+                              </TableRow>
+                          ))}
+                </TableBody>
+            </Table>
+
+            {characters && characters.length === 0 && <NoResults />}
+        </>
     );
 }

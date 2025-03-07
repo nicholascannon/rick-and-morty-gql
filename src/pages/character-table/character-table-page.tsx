@@ -27,7 +27,7 @@ export function CharacterTablePage() {
                 filterState={filterState}
                 updateFilters={setFilterState}
             />
-            <CharacterTable characters={characters} />
+            <CharacterTable characters={characters} pagination={pagination} />
             <TablePagination pagination={pagination} />
         </section>
     );
