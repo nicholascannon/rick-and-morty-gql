@@ -1,44 +1,68 @@
 import debounce from 'lodash.debounce';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import { FilterCharacter } from '@/__generated__/types';
+import { FilterState } from '../hooks/use-table-filters';
+
 import { DropDownSelect } from '@/components/drop-down-select';
 import { Input } from '@/components/ui/input';
 import { SelectItem } from '@/components/ui/select';
 
 interface Props {
-    filterState: FilterCharacter;
-    updateFilters: (filter: FilterCharacter) => void;
+    filterState: FilterState;
+    updateFilters: (filter: FilterState) => void;
 }
 
-export function TableFilters(props: Props) {
-    const [localFilterState, setLocalFilterState] = useState<FilterCharacter>(
-        props.filterState,
-    );
-    const updateFilters = debounce(props.updateFilters, 250);
+interface LocalState {
+    name?: string;
+    status?: string;
+    gender?: string;
+}
 
-    const onFilterChange = (name: string, value: string | undefined) => {
-        const updatedState = {
-            ...localFilterState,
+const DEBOUNCE_DELAY = 500;
+
+export function TableFilters({ filterState, updateFilters }: Props) {
+    const [localState, setLocalState] = useState<LocalState>(filterState);
+    const debouncedUpdateFilters = useMemo(
+        () => debounce(updateFilters, DEBOUNCE_DELAY),
+        [updateFilters],
+    );
+
+    const onFilterChange = (
+        name: string,
+        value: string | undefined,
+        debounce = false,
+    ) => {
+        setLocalState({ ...localState, [name]: value });
+
+        const updatedFilterState = {
+            ...filterState,
             [name]: value,
+            page: 1, // always go back to first page
         };
-        setLocalFilterState(updatedState);
-        updateFilters(updatedState);
+
+        if (debounce) {
+            console.log('debouncing');
+            debouncedUpdateFilters(updatedFilterState);
+            return;
+        }
+        updateFilters(updatedFilterState);
     };
 
     return (
         <section className="flex flex-col gap-2 md:flex-row md:gap-4">
             <Input
                 name="name"
-                value={localFilterState.name ?? ''}
-                onChange={(e) => onFilterChange(e.target.name, e.target.value)}
+                value={localState.name ?? ''}
+                onChange={(e) =>
+                    onFilterChange(e.target.name, e.target.value, true)
+                }
                 className="md:w-1/3"
                 placeholder="Search characters"
             />
 
             <DropDownSelect
                 placeholder="Status"
-                value={localFilterState.status ?? ''}
+                value={localState.status ?? ''}
                 triggerClassName="md:w-[180px]"
                 options={
                     <>
@@ -53,7 +77,7 @@ export function TableFilters(props: Props) {
 
             <DropDownSelect
                 placeholder="Gender"
-                value={localFilterState.gender ?? ''}
+                value={localState.gender ?? ''}
                 triggerClassName="md:w-[180px]"
                 options={
                     <>

@@ -1,31 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router';
+import { useEffect } from 'react';
 
 import { CharacterTable } from './components/character-table';
 import { TableFilters } from './components/table-filters';
 import { TablePagination } from './components/table-pagination';
-import { useGetCharacters } from './hooks/use-get-characters';
-import { useSyncFilterParams } from './hooks/use-sync-filter-params';
-
-import { FilterCharacter } from '@/__generated__/types';
+import { useTableFilters } from './hooks/use-table-filters';
+import { useGetCharacters } from './services/use-get-characters';
 
 export function CharacterTablePage() {
-    const [searchParams] = useSearchParams();
+    const { filterState, setFilterState } = useTableFilters();
 
-    const page = Number(searchParams.get('page') ?? 1);
-    const name = searchParams.get('name');
-    const status = searchParams.get('status');
-    const gender = searchParams.get('gender');
-
-    const [filterState, setFilterState] = useState<FilterCharacter>({
-        name,
-        status,
-        gender,
-    });
-
-    const { data, error } = useGetCharacters(page, filterState);
-
-    useSyncFilterParams(filterState, page);
+    const { page, ...otherFilters } = filterState;
+    const { data, error } = useGetCharacters(page, otherFilters);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
