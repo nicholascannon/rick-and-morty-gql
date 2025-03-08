@@ -20,17 +20,20 @@ import {
 } from '@/components/ui/table';
 
 interface Props {
+    page: number;
     characters: (TableCharacterFragment | null)[] | undefined | null;
     pagination: PaginationInfoFragment | null | undefined;
 }
 
-export function CharacterTable({ characters, pagination }: Props) {
+export function CharacterTable({ page, characters, pagination }: Props) {
     return (
         <>
             {pagination?.count && characters?.length && (
-                <p className="text-sm text-muted-foreground">
-                    Showing {characters?.length} of {pagination.count}
-                </p>
+                <PageInfo
+                    page={page}
+                    resultCount={characters.length}
+                    pagination={pagination}
+                />
             )}
 
             <Table>
@@ -89,5 +92,23 @@ export function CharacterTable({ characters, pagination }: Props) {
 
             {characters && characters.length === 0 && <NoResults />}
         </>
+    );
+}
+
+function PageInfo({
+    page,
+    resultCount,
+    pagination,
+}: {
+    page: number;
+    resultCount: number;
+    pagination: PaginationInfoFragment;
+}) {
+    return (
+        <p className="text-sm text-muted-foreground">
+            Showing {(page - 1) * resultCount + 1} -{' '}
+            {Math.min(page * resultCount, pagination.count ?? 0)} of{' '}
+            {pagination.count}
+        </p>
     );
 }
