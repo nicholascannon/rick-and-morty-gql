@@ -90,7 +90,7 @@ export function CharacterTable({ page, characters, pagination }: Props) {
                 </TableBody>
             </Table>
 
-            {characters && characters.length === 0 && <NoResults />}
+            {characters?.length === 0 && <NoResults />}
         </>
     );
 }
