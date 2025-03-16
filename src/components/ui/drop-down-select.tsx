@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import { Select, SelectContent, SelectTrigger, SelectValue } from './ui/select';
+import { Select, SelectContent, SelectTrigger, SelectValue } from './select';
 
 export function DropDownSelect({
     value,
