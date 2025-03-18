@@ -1,9 +1,9 @@
 import {
-    ApolloClient,
+    type ApolloClient,
     ApolloProvider,
-    NormalizedCacheObject,
+    type NormalizedCacheObject,
 } from '@apollo/client';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export const AppProvider = ({
     children,

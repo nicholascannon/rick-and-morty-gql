@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 
 import getCharactersQuery from './get-characters.query.gql';
 
-import {
+import type {
     FilterCharacter,
     GetCharactersQuery,
     GetCharactersQueryVariables,

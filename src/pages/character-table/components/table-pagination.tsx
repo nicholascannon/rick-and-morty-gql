@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 
-import { PaginationInfoFragment } from '@/__generated__/types';
+import type { PaginationInfoFragment } from '@/__generated__/types';
 import {
     Pagination,
     PaginationContent,

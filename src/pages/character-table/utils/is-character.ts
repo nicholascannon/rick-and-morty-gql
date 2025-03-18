@@ -1,4 +1,4 @@
-import { TableCharacterFragment } from '@/__generated__/types';
+import type { TableCharacterFragment } from '@/__generated__/types';
 
 export function isCharacter(
     character: TableCharacterFragment | null,

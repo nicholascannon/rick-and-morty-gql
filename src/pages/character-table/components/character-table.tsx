@@ -4,7 +4,7 @@ import { isCharacter } from '../utils/is-character';
 
 import { NoResults } from './no-results';
 
-import {
+import type {
     PaginationInfoFragment,
     TableCharacterFragment,
 } from '@/__generated__/types';
@@ -80,6 +80,7 @@ export function CharacterTable({ page, characters, pagination }: Props) {
                               </TableRow>
                           ))
                         : new Array(5).fill(null).map((_, index) => (
+                              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                               <TableRow key={index}>
                                   <TableCell className="flex flex-row items-center">
                                       <Skeleton className="h-[40px] w-[40px] rounded-full" />

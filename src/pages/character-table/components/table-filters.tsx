@@ -1,7 +1,7 @@
 import debounce from 'lodash.debounce';
 import { useMemo, useState } from 'react';
 
-import { FilterState } from '../hooks/use-table-filters';
+import type { FilterState } from '../hooks/use-table-filters';
 
 import { DropDownSelect } from '@/components/ui/drop-down-select';
 import { Input } from '@/components/ui/input';

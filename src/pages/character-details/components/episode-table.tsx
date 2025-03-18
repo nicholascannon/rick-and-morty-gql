@@ -1,12 +1,12 @@
-import { GetCharacterQuery } from '@/__generated__/types';
+import type { GetCharacterQuery } from '@/__generated__/types';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
     Table,
-    TableHeader,
-    TableRow,
-    TableHead,
     TableBody,
     TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from '@/components/ui/table';
 
 interface Props {
@@ -34,6 +34,7 @@ export function EpisodeTable({ character }: Props) {
                           </TableRow>
                       ))
                     : new Array(5).fill(null).map((_, index) => (
+                          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                           <TableRow key={index}>
                               <TableCell>
                                   <Skeleton className="h-[20px] w-[50px]" />

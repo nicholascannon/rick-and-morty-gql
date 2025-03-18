@@ -12,6 +12,7 @@ export function CharacterTablePage() {
     const { page, ...otherFilters } = filterState;
     const { data, error } = useGetCharacters(page, otherFilters);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: we want to scroll to top when page changes
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [page]);
