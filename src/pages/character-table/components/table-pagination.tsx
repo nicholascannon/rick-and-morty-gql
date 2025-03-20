@@ -34,6 +34,8 @@ export function TablePagination({ pagination }: Props) {
         return `/?${newParams.toString()}`;
     };
 
+    const goToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
     return (
         <Pagination>
             <PaginationContent>
@@ -49,6 +51,7 @@ export function TablePagination({ pagination }: Props) {
                         to={
                             pagination.prev ? getPageLink(pagination.prev) : '#'
                         }
+                        onClick={goToTop}
                     />
                 </PaginationItem>
 
@@ -89,6 +92,7 @@ export function TablePagination({ pagination }: Props) {
                         to={
                             pagination.next ? getPageLink(pagination.next) : '#'
                         }
+                        onClick={goToTop}
                     />
                 </PaginationItem>
             </PaginationContent>

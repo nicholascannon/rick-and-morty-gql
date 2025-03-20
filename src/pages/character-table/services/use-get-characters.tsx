@@ -9,7 +9,7 @@ import type {
 } from '@/__generated__/types';
 
 export function useGetCharacters(page: number, filter?: FilterCharacter) {
-    return useQuery<GetCharactersQuery, GetCharactersQueryVariables>(
+    const res = useQuery<GetCharactersQuery, GetCharactersQueryVariables>(
         getCharactersQuery,
         {
             variables: {
@@ -18,4 +18,12 @@ export function useGetCharacters(page: number, filter?: FilterCharacter) {
             },
         },
     );
+
+    return {
+        ...res,
+        data: {
+            characters: res.data?.characters?.results,
+            pagination: res.data?.characters?.info,
+        },
+    };
 }

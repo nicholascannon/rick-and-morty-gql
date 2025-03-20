@@ -25,6 +25,8 @@ interface Props {
     pagination: PaginationInfoFragment | null | undefined;
 }
 
+const SKELETON_ROWS = 20;
+
 export function CharacterTable({ page, characters, pagination }: Props) {
     return (
         <>
@@ -79,15 +81,17 @@ export function CharacterTable({ page, characters, pagination }: Props) {
                                   <TableCell>{character.gender}</TableCell>
                               </TableRow>
                           ))
-                        : new Array(5).fill(null).map((_, index) => (
-                              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                              <TableRow key={index}>
-                                  <TableCell className="flex flex-row items-center">
-                                      <Skeleton className="h-[40px] w-[40px] rounded-full" />
-                                      <Skeleton className="h-[20px] w-[150px] ml-4" />
-                                  </TableCell>
-                              </TableRow>
-                          ))}
+                        : new Array(SKELETON_ROWS)
+                              .fill(null)
+                              .map((_, index) => (
+                                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                  <TableRow key={index}>
+                                      <TableCell className="flex flex-row items-center">
+                                          <Skeleton className="h-[40px] w-[40px] rounded-full" />
+                                          <Skeleton className="h-[20px] w-[150px] ml-4" />
+                                      </TableCell>
+                                  </TableRow>
+                              ))}
                 </TableBody>
             </Table>
 

@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { CharacterTable } from './components/character-table';
 import { TableFilters } from './components/table-filters';
 import { TablePagination } from './components/table-pagination';
@@ -12,15 +10,7 @@ export function CharacterTablePage() {
     const { page, ...otherFilters } = filterState;
     const { data, error } = useGetCharacters(page, otherFilters);
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: we want to scroll to top when page changes
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, [page]);
-
     if (error) return <h1>Error: {error.message}</h1>;
-
-    const characters = data?.characters?.results;
-    const pagination = data?.characters?.info;
 
     return (
         <section className="flex flex-col gap-4">
@@ -30,10 +20,10 @@ export function CharacterTablePage() {
             />
             <CharacterTable
                 page={page}
-                characters={characters}
-                pagination={pagination}
+                characters={data.characters}
+                pagination={data.pagination}
             />
-            <TablePagination pagination={pagination} />
+            <TablePagination pagination={data.pagination} />
         </section>
     );
 }
