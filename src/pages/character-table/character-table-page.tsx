@@ -8,7 +8,7 @@ export function CharacterTablePage() {
     const { filterState, setFilterState } = useTableFilters();
 
     const { page, ...otherFilters } = filterState;
-    const { data, error } = useGetCharacters(page, otherFilters);
+    const { data, loading, error } = useGetCharacters(page, otherFilters);
 
     if (error) return <h1>Error: {error.message}</h1>;
 
@@ -20,6 +20,7 @@ export function CharacterTablePage() {
             />
             <CharacterTable
                 page={page}
+                loading={loading}
                 characters={data.characters}
                 pagination={data.pagination}
             />

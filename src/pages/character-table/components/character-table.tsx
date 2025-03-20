@@ -23,20 +23,25 @@ interface Props {
     page: number;
     characters: (TableCharacterFragment | null)[] | undefined | null;
     pagination: PaginationInfoFragment | null | undefined;
+    loading: boolean;
 }
 
 const SKELETON_ROWS = 20;
 
-export function CharacterTable({ page, characters, pagination }: Props) {
+export function CharacterTable({
+    page,
+    characters,
+    pagination,
+    loading,
+}: Props) {
     return (
         <>
-            {pagination?.count && characters?.length && (
-                <PageInfo
-                    page={page}
-                    resultCount={characters.length}
-                    pagination={pagination}
-                />
-            )}
+            <PageInfo
+                page={page}
+                loading={loading}
+                resultCount={characters?.length}
+                pagination={pagination}
+            />
 
             <Table>
                 <TableHeader>
@@ -90,6 +95,18 @@ export function CharacterTable({ page, characters, pagination }: Props) {
                                           <Skeleton className="h-[40px] w-[40px] rounded-full" />
                                           <Skeleton className="h-[20px] w-[150px] ml-4" />
                                       </TableCell>
+
+                                      <TableCell>
+                                          <Skeleton className="h-[20px] w-[40px]" />
+                                      </TableCell>
+
+                                      <TableCell>
+                                          <Skeleton className="h-[20px] w-[80px]" />
+                                      </TableCell>
+
+                                      <TableCell>
+                                          <Skeleton className="h-[20px] w-[50px]" />
+                                      </TableCell>
                                   </TableRow>
                               ))}
                 </TableBody>
@@ -104,11 +121,16 @@ function PageInfo({
     page,
     resultCount,
     pagination,
+    loading,
 }: {
     page: number;
-    resultCount: number;
-    pagination: PaginationInfoFragment;
+    resultCount: number | undefined;
+    pagination: PaginationInfoFragment | undefined | null;
+    loading: boolean;
 }) {
+    if (loading) return <Skeleton className="h-6 w-44" />;
+    if (!resultCount || !pagination) return null;
+
     return (
         <p className="text-sm text-muted-foreground">
             Showing {(page - 1) * resultCount + 1} -{' '}
