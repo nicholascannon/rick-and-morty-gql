@@ -72,7 +72,7 @@ export function CharacterTable({
 
                                       <Link
                                           to={`/character/${character.id}`}
-                                          className="ml-4"
+                                          className="ml-4 hover:underline"
                                       >
                                           {character.name ??
                                               'Unknown character'}
