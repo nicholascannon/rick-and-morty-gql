@@ -42,7 +42,6 @@ export function TableFilters({ filterState, updateFilters }: Props) {
         };
 
         if (debounce) {
-            console.log('debouncing');
             debouncedUpdateFilters(updatedFilterState);
             return;
         }
