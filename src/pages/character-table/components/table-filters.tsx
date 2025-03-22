@@ -6,6 +6,7 @@ import type { FilterState } from '../hooks/use-table-filters';
 import { DropDownSelect } from '@/components/ui/drop-down-select';
 import { Input } from '@/components/ui/input';
 import { SelectItem } from '@/components/ui/select';
+import { ClearButton } from '@/components/ui/clear-button';
 
 interface Props {
     filterState: FilterState;
@@ -50,15 +51,22 @@ export function TableFilters({ filterState, updateFilters }: Props) {
 
     return (
         <section className="flex flex-col gap-2 md:flex-row md:gap-4">
-            <Input
-                name="name"
-                value={localState.name ?? ''}
-                onChange={(e) =>
-                    onFilterChange(e.target.name, e.target.value, true)
-                }
-                className="md:w-1/3"
-                placeholder="Search characters"
-            />
+            <div className="flex gap-2 md:w-1/3">
+                <Input
+                    name="name"
+                    value={localState.name ?? ''}
+                    onChange={(e) =>
+                        onFilterChange(e.target.name, e.target.value, true)
+                    }
+                    placeholder="Search characters"
+                />
+                {localState.name && (
+                    <ClearButton
+                        type="reset"
+                        onClick={() => onFilterChange('name', undefined)}
+                    />
+                )}
+            </div>
 
             <DropDownSelect
                 placeholder="Status"

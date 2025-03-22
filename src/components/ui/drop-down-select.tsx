@@ -1,7 +1,7 @@
-import { X } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import { Select, SelectContent, SelectTrigger, SelectValue } from './select';
+import { ClearButton } from './clear-button';
 
 export function DropDownSelect({
     value,
@@ -28,15 +28,7 @@ export function DropDownSelect({
                 <SelectContent>{options}</SelectContent>
             </Select>
 
-            {value && (
-                <button
-                    type="button"
-                    className="text-muted-foreground"
-                    onClick={onReset}
-                >
-                    <X className="h-4 w-4" />
-                </button>
-            )}
+            {value && <ClearButton type="reset" onClick={onReset} />}
         </div>
     );
 }
