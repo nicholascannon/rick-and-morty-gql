@@ -2,15 +2,13 @@ import { useParams } from 'react-router';
 
 import { CharacterNotFound } from './components/character-not-found';
 import { EpisodeTable } from './components/episode-table';
-import { useGetCharacter } from './hooks/use-get-character';
+import { useGetCharacter } from './services/use-get-character';
 
 import { Skeleton } from '@/components/ui/skeleton';
 
 export function CharacterDetailsPage() {
     const { id } = useParams<{ id: string }>();
-
-    const { loading, data } = useGetCharacter(id);
-    const character = data?.character;
+    const { loading, data: character } = useGetCharacter(id);
 
     if (!loading && !character) return <CharacterNotFound />;
 

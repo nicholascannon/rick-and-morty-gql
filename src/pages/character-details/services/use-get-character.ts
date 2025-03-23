@@ -7,8 +7,8 @@ import type {
     GetCharacterQueryVariables,
 } from '@/__generated__/types';
 
-export const useGetCharacter = (id: string | undefined) => {
-    return useQuery<GetCharacterQuery, GetCharacterQueryVariables>(
+export function useGetCharacter(id: string | undefined) {
+    const res = useQuery<GetCharacterQuery, GetCharacterQueryVariables>(
         getCharacterQuery,
         id
             ? {
@@ -18,4 +18,9 @@ export const useGetCharacter = (id: string | undefined) => {
                   skip: true,
               },
     );
-};
+
+    return {
+        ...res,
+        data: res.data?.character,
+    };
+}
