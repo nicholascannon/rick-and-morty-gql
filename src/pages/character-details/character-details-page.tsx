@@ -5,6 +5,7 @@ import { EpisodeTable } from './components/episode-table';
 import { useGetCharacter } from './services/use-get-character';
 
 import { Skeleton } from '@/components/ui/skeleton';
+import { CharacterAvatar } from './components/character-avatar';
 
 export function CharacterDetailsPage() {
     const { id } = useParams<{ id: string }>();
@@ -15,19 +16,7 @@ export function CharacterDetailsPage() {
     return (
         <div className="flex flex-col gap-10">
             <section className="flex flex-row gap-12 items-center">
-                {character ? (
-                    <img
-                        className="w-[200px] h-[200px] rounded-full"
-                        src={character.image ?? '/headshot.jpg'}
-                        alt={
-                            character
-                                ? `Image of ${character.name}`
-                                : 'Character avatar'
-                        }
-                    />
-                ) : (
-                    <Skeleton className="w-[200px] h-[200px] rounded-full" />
-                )}
+                <CharacterAvatar character={character} />
 
                 <div>
                     {character ? (
