@@ -1,11 +1,7 @@
-import type { Maybe } from '@/__generated__/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Character } from '../services/types';
 
-export function CharacterAvatar({
-    character,
-}: {
-    character?: { image?: Maybe<string>; name?: Maybe<string> } | null;
-}) {
+export function CharacterAvatar({ character }: { character: Character }) {
     if (!character) {
         return <Skeleton className="w-[200px] h-[200px] rounded-full" />;
     }
