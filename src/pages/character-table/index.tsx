@@ -1,1 +1,3 @@
-export { CharacterTablePage } from './character-table-page';
+import { CharacterTablePage } from './character-table-page';
+
+export default CharacterTablePage;
