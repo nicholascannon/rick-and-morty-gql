@@ -1,4 +1,4 @@
-import { type ReactNode, Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router';
 
 import { RootLayout } from '@/components/layouts/root-layout';
@@ -7,10 +7,6 @@ import { LoaderPage } from '@/components/loader-page';
 const CharacterTablePage = lazy(() => import('@/pages/character-table'));
 const CharacterDetailsPage = lazy(() => import('@/pages/character-details'));
 
-function AsyncPage({ page }: { page: ReactNode }) {
-    return <Suspense fallback={<LoaderPage />}>{page}</Suspense>;
-}
-
 const router = createBrowserRouter([
     {
         path: '/',
@@ -18,16 +14,20 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <AsyncPage page={<CharacterTablePage />} />,
+                element: <CharacterTablePage />,
             },
             {
                 path: '/character/:id',
-                element: <AsyncPage page={<CharacterDetailsPage />} />,
+                element: <CharacterDetailsPage />,
             },
         ],
     },
 ]);
 
 export function Router() {
-    return <RouterProvider router={router} />;
+    return (
+        <Suspense fallback={<LoaderPage />}>
+            <RouterProvider router={router} />
+        </Suspense>
+    );
 }
