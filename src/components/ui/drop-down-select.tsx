@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { Select, SelectContent, SelectTrigger, SelectValue } from './select';
 import { ClearButton } from './clear-button';
+import { Select, SelectContent, SelectTrigger, SelectValue } from './select';
 
 export function DropDownSelect({
     value,

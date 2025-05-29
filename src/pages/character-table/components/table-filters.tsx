@@ -3,10 +3,10 @@ import { useMemo, useState } from 'react';
 
 import type { FilterState } from '../hooks/use-table-filters';
 
+import { ClearButton } from '@/components/ui/clear-button';
 import { DropDownSelect } from '@/components/ui/drop-down-select';
 import { Input } from '@/components/ui/input';
 import { SelectItem } from '@/components/ui/select';
-import { ClearButton } from '@/components/ui/clear-button';
 
 interface Props {
     filterState: FilterState;
