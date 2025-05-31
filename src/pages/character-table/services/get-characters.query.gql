@@ -1,26 +1,26 @@
 query GetCharacters($page: Int!, $filter: FilterCharacter) {
-    characters(page: $page, filter: $filter) {
-        info {
-            ...PaginationInfo
-        }
-        results {
-            ...TableCharacter
-        }
+  characters(page: $page, filter: $filter) {
+    info {
+      ...PaginationInfo
     }
+    results {
+      ...TableCharacter
+    }
+  }
 }
 
 fragment PaginationInfo on Info {
-    count
-    totalPages: pages
-    next
-    prev
+  count
+  totalPages: pages
+  next
+  prev
 }
 
 fragment TableCharacter on Character {
-    id
-    name
-    image
-    status
-    species
-    gender
+  id
+  name
+  image
+  status
+  species
+  gender
 }

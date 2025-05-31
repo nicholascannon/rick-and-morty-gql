@@ -8,26 +8,26 @@ const CharacterTablePage = lazy(() => import('@/pages/character-table'));
 const CharacterDetailsPage = lazy(() => import('@/pages/character-details'));
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <RootLayout />,
-        children: [
-            {
-                index: true,
-                element: <CharacterTablePage />,
-            },
-            {
-                path: '/character/:id',
-                element: <CharacterDetailsPage />,
-            },
-        ],
-    },
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <CharacterTablePage />,
+      },
+      {
+        path: '/character/:id',
+        element: <CharacterDetailsPage />,
+      },
+    ],
+  },
 ]);
 
 export function Router() {
-    return (
-        <Suspense fallback={<LoaderPage />}>
-            <RouterProvider router={router} />
-        </Suspense>
-    );
+  return (
+    <Suspense fallback={<LoaderPage />}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }

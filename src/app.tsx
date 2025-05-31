@@ -3,9 +3,9 @@ import { AppProvider } from '@/providers/app-provider';
 import { Router } from '@/router';
 
 export function App() {
-    return (
-        <AppProvider client={CLIENT}>
-            <Router />
-        </AppProvider>
-    );
+  return (
+    <AppProvider client={CLIENT}>
+      <Router />
+    </AppProvider>
+  );
 }
