@@ -1,7 +1,6 @@
 {
   "editor.defaultFormatter": "biomejs.biome",
-  "biome.searchInPath": false,
-  "biome.lspBin": "node_modules/.bin/biome",
+  "biome.lsp.bin": "node_modules/.bin/biome",
   "editor.codeActionsOnSave": {
     "quickfix.biome": "explicit",
     "source.organizeImports.biome": "explicit"
