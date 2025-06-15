@@ -1,5 +1,6 @@
 import { useParams } from 'react-router';
 
+import { ErrorPage } from '@/components/pages/error-page';
 import { CharacterAvatar } from './components/character-avatar';
 import { CharacterDetails } from './components/character-details';
 import { CharacterNotFound } from './components/character-not-found';
@@ -8,9 +9,10 @@ import { useGetCharacter } from './services/use-get-character';
 
 export function CharacterDetailsPage() {
   const { id } = useParams<{ id: string }>();
-  const { loading, data: character } = useGetCharacter(id);
+  const { loading, data: character, error } = useGetCharacter(id);
 
   if (!loading && !character) return <CharacterNotFound />;
+  if (error) return <ErrorPage error={error} />;
 
   return (
     <div className="flex flex-col gap-10">
