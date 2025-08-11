@@ -1,4 +1,3 @@
-import { ErrorPage } from '@/components/pages/error-page';
 import { CharacterTable } from './components/character-table';
 import { TableFilters } from './components/table-filters';
 import { TablePagination } from './components/table-pagination';
@@ -11,7 +10,7 @@ export function CharacterTablePage() {
   const { page, ...otherFilters } = filterState;
   const { data, loading, error } = useGetCharacters(page, otherFilters);
 
-  if (error) return <ErrorPage error={error} />;
+  if (error) throw error;
 
   return (
     <section className="flex flex-col gap-4">

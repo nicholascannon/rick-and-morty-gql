@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 
-import { MenuBar } from '../navigation/menu-bar';
+import { MenuBar } from './menu-bar';
 
 export function RootLayout() {
   return (

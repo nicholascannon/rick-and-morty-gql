@@ -1,9 +1,9 @@
 import { Suspense, lazy } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router';
 
-import { RootLayout } from '@/components/layouts/root-layout';
-import { LoaderPage } from '@/components/pages/loader-page';
-import { ErrorPage } from './components/pages/error-page';
+import { LoaderPage } from '@/components/loader-page';
+import { RootLayout } from '@/components/root-layout';
+import { ErrorPage } from './pages/error/error-page';
 
 const CharacterTablePage = lazy(() => import('@/pages/character-table'));
 const CharacterDetailsPage = lazy(() => import('@/pages/character-details'));
