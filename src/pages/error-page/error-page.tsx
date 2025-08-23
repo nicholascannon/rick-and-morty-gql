@@ -1,9 +1,5 @@
+import { GraphQLError } from 'graphql';
 import { useRouteError } from 'react-router';
-
-interface GraphQLError {
-  graphQLErrors?: Array<{ message: string }>;
-  message?: string;
-}
 
 export function ErrorPage() {
   const error = useRouteError();
@@ -27,20 +23,8 @@ export function ErrorPage() {
 }
 
 function extractErrorMessage(error: unknown) {
-  if (error && typeof error === 'object' && 'graphQLErrors' in error) {
-    const graphQLError = error as GraphQLError;
-    if (graphQLError.graphQLErrors && graphQLError.graphQLErrors.length > 0) {
-      return graphQLError.graphQLErrors[0].message;
-    }
-    if (graphQLError.message) {
-      return graphQLError.message;
-    }
-  }
-  if (error instanceof Error) {
-    return error.message;
-  }
-  if (typeof error === 'string') {
-    return error;
-  }
+  if (error instanceof GraphQLError) return error.message;
+  if (error instanceof Error) return error.message;
+  if (typeof error === 'string') return error;
   return 'An unexpected error occurred';
 }
