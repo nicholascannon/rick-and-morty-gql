@@ -1,11 +1,11 @@
 import { CLIENT } from '@/lib/client';
-import { AppProvider } from '@/providers/app-provider';
 import { Router } from '@/router';
+import { ApolloProvider } from '@apollo/client';
 
 export function App() {
   return (
-    <AppProvider client={CLIENT}>
+    <ApolloProvider client={CLIENT}>
       <Router />
-    </AppProvider>
+    </ApolloProvider>
   );
 }
