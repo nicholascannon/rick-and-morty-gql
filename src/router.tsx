@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router';
 
 import { LoaderPage } from '@/components/loader-page';
 import { RootLayout } from '@/components/root-layout';
-import { ErrorPage } from './pages/error/error-page';
+import { ErrorPage } from './pages/error-page';
 
 const CharacterTablePage = lazy(() => import('@/pages/character-table'));
 const CharacterDetailsPage = lazy(() => import('@/pages/character-details'));
