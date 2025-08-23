@@ -1,5 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton';
-import type { Character } from '../services/types';
+import type { Character } from '../types';
 
 export function CharacterDetails({ character }: { character: Character }) {
   return (

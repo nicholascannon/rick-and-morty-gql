@@ -1,6 +1,4 @@
-import { useSearchParams } from 'react-router';
-
-import type { PaginationInfoFragment } from '@/__generated__/types';
+import type { PaginationInfoFragment } from '@/__generated__/graphql';
 import {
   Pagination,
   PaginationContent,
@@ -9,6 +7,7 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useSearchParams } from 'react-router';
 
 interface Props {
   pagination: PaginationInfoFragment | null | undefined;

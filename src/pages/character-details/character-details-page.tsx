@@ -1,14 +1,26 @@
 import { useParams } from 'react-router';
 
+import { useGetCharacterQuery } from '@/__generated__/graphql';
 import { CharacterAvatar } from './components/character-avatar';
 import { CharacterDetails } from './components/character-details';
 import { CharacterNotFound } from './components/character-not-found';
 import { EpisodeTable } from './components/episode-table';
-import { useGetCharacter } from './services/use-get-character';
 
 export function CharacterDetailsPage() {
   const { id } = useParams<{ id: string }>();
-  const { loading, data: character, error } = useGetCharacter(id);
+  const { loading, data, error } = useGetCharacterQuery(
+    id
+      ? {
+          variables: {
+            id,
+          },
+        }
+      : {
+          skip: true,
+        },
+  );
+
+  const character = data?.character;
 
   if (!loading && !character) return <CharacterNotFound />;
   if (error) throw error;

@@ -1,4 +1,4 @@
-import type { TableCharacterFragment } from '@/__generated__/types';
+import type { TableCharacterFragment } from '@/__generated__/graphql';
 
 export function isCharacter(
   character: TableCharacterFragment | null,

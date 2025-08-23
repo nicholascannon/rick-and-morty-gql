@@ -1,4 +1,4 @@
-import type { GetCharacterQuery } from '@/__generated__/types';
+import type { GetCharacterQuery } from '@/__generated__/graphql';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,

@@ -1,13 +1,7 @@
-import { Link } from 'react-router';
-
-import { isCharacter } from '../utils/is-character';
-
-import { NoResults } from './no-results';
-
 import type {
   PaginationInfoFragment,
   TableCharacterFragment,
-} from '@/__generated__/types';
+} from '@/__generated__/graphql';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -18,6 +12,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { Link } from 'react-router';
+import { isCharacter } from '../utils/is-character';
+import { NoResults } from './no-results';
 
 interface Props {
   page: number;
